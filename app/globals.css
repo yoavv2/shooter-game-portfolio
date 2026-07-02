@@ -217,10 +217,36 @@ body {
   }
 }
 
+/* mobile TAC menu: backdrop fade + panel slide-in */
+.animate-menu-fade {
+  animation: menu-fade 0.2s ease-out;
+}
+@keyframes menu-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-menu-slide {
+  animation: menu-slide 0.26s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+@keyframes menu-slide {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .route-wipe,
   .route-reveal,
-  .animate-toast-in {
+  .animate-toast-in,
+  .animate-menu-fade,
+  .animate-menu-slide {
     animation: none;
   }
   .route-wipe {

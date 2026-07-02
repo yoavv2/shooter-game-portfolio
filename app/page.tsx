@@ -68,8 +68,8 @@ export default function LobbyPage() {
           ))}
         </section>
 
-        {/* CENTER — operator */}
-        <section className="flex flex-1 flex-col items-center">
+        {/* CENTER — operator (hoisted to top on mobile) */}
+        <section className="order-first flex flex-1 flex-col items-center lg:order-none">
           <div className="mt-0.5 text-[22px] font-semibold tracking-[0.06em] text-ink2">
             {profile.name}
           </div>

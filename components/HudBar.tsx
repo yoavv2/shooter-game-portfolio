@@ -5,8 +5,9 @@ import { usePathname } from "next/navigation";
 import { profile } from "@/lib/data";
 import { useSound } from "./game/SoundProvider";
 import { useAchievements } from "./game/AchievementsProvider";
+import MobileMenu from "./MobileMenu";
 
-const NAV = [
+export const NAV = [
   { label: "MAIN", href: "/" },
   { label: "MISSIONS", href: "/missions" },
   { label: "LOADOUT", href: "/loadout" },
@@ -30,7 +31,7 @@ export default function HudBar() {
     <header className="flex h-[62px] flex-none items-center justify-between border-b border-line2 bg-[rgba(9,12,17,0.92)] px-4 md:px-[26px]">
       <div className="flex items-center gap-6 md:gap-10">
         <div className="h-[22px] w-[22px] rotate-45 border-2 border-[#3a4450]" />
-        <nav className="flex items-center gap-5 md:gap-9">
+        <nav className="hidden items-center gap-5 md:flex md:gap-9">
           {NAV.map((item) => {
             const active =
               item.href === "/"
@@ -98,6 +99,8 @@ export default function HudBar() {
           CV ↓
         </a>
       </div>
+
+      <MobileMenu />
     </header>
   );
 }
