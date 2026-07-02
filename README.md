@@ -32,8 +32,37 @@ npm run build    # static prerender, all routes ○ (Static)
 
 ## Edit content
 
-All copy lives in `lib/data.ts` — profile, missions, skills, stats, links
+Profile, skills, stats and links live in `lib/data.ts`
 (GitHub / LinkedIn URLs are placeholders there).
+
+## Projects (missions)
+
+Each project is one markdown file in `content/missions/`. The filename is the
+URL slug (`gaphunter.md` → `/missions/gaphunter`). Frontmatter drives the
+cards; the markdown body is the intel page shown when a card is clicked —
+so a project shows even when it isn't deployed anywhere.
+
+```markdown
+---
+name: My Project            # display name
+rarity: LEGENDARY           # LEGENDARY | EPIC | RARE
+blurb: One-line description shown on cards
+progress: 100               # 0–100 progress bar
+order: 1                    # sort position in the grid
+stack: [Next.js, Supabase]  # tech chips
+liveUrl: https://…          # optional — shows a DEPLOY button
+repoUrl: https://github.com/… # optional — shows a SOURCE button
+---
+
+## OBJECTIVE
+
+Free-form markdown — headings, lists, links, code, images.
+```
+
+- **Add a project** — create a new `.md` file there. It appears everywhere
+  automatically (lobby, mission grid, terminal, detail page).
+- **Edit / remove** — edit or delete the file.
+- No `liveUrl`? The detail page shows "OFFLINE — INTEL ONLY" instead of DEPLOY.
 
 ## Theme
 

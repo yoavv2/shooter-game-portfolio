@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Shell from "@/components/Shell";
 import MissionGridCard from "@/components/MissionGridCard";
-import { missions } from "@/lib/data";
+import { getMissions } from "@/lib/missions";
 
 export const metadata: Metadata = {
   title: "Missions — Yoav Hevroni",
@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function MissionsPage() {
+  const missions = getMissions();
   return (
     <Shell glow="70% 20%">
       <div className="flex flex-1 flex-col px-6 py-8 lg:px-[34px]">

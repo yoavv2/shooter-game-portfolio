@@ -2,9 +2,12 @@ import Link from "next/link";
 import Shell from "@/components/Shell";
 import AvatarStage from "@/components/AvatarStage";
 import StatTriple from "@/components/StatTriple";
-import { missions, profile, rarityColor, rarityChip } from "@/lib/data";
+import { profile, rarityColor, rarityChip } from "@/lib/data";
+import { getMissions } from "@/lib/missions";
 
 export default function LobbyPage() {
+  const missions = getMissions();
+  const featured = missions[0];
   return (
     <Shell glow="55% 32%">
       <div className="flex flex-1 flex-col gap-6 px-6 py-6 lg:flex-row lg:gap-6 lg:px-[30px] lg:pb-[22px] lg:pt-[26px]">
@@ -14,9 +17,10 @@ export default function LobbyPage() {
             MISSIONS
           </h2>
           {missions.map((m) => (
-            <div
+            <Link
               key={m.slug}
-              className="flex flex-col gap-[11px] border border-line bg-[rgba(15,19,26,0.88)] px-4 pb-[18px] pt-4"
+              href={`/missions/${m.slug}`}
+              className="flex flex-col gap-[11px] border border-line bg-[rgba(15,19,26,0.88)] px-4 pb-[18px] pt-4 transition-colors hover:border-[#39424e]"
             >
               <div className="flex items-baseline justify-between">
                 <span className="text-[16px] font-semibold text-ink2">
@@ -60,7 +64,7 @@ export default function LobbyPage() {
                   );
                 })}
               </div>
-            </div>
+            </Link>
           ))}
         </section>
 
@@ -91,7 +95,7 @@ export default function LobbyPage() {
                 featured project screenshot
               </div>
               <div className="relative w-full bg-[linear-gradient(transparent,rgba(5,7,10,0.9))] px-3 py-2.5 text-[19px] font-bold tracking-[0.06em] text-white">
-                GAPHUNTER
+                {featured ? featured.name.toUpperCase() : "CLASSIFIED"}
               </div>
             </div>
             <div className="flex gap-[22px]">

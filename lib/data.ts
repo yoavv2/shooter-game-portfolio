@@ -57,6 +57,9 @@ export const stats = [
   { label: "AI-DEV", tag: "AI", value: "100", color: "#3b9dff", border: "#1d3a5c", bg: "rgba(29,58,92,0.2)" },
 ];
 
+// Mission data itself lives in content/missions/*.md (one markdown file per
+// project) — loaded server-side by lib/missions.ts. Only the type stays here
+// so client components can import it without pulling in fs.
 export type Mission = {
   slug: string;
   name: string;
@@ -64,37 +67,10 @@ export type Mission = {
   blurb: string;
   progress: number;
   stack: string[];
+  order: number;
+  liveUrl?: string;
+  repoUrl?: string;
 };
-
-export const missions: Mission[] = [
-  {
-    slug: "gaphunter",
-    name: "GapHunter",
-    rarity: "LEGENDARY",
-    blurb:
-      "Turn unstructured app reviews into structured insights & reports with AI",
-    progress: 100,
-    stack: ["Next.js", "Convex", "OpenAI"],
-  },
-  {
-    slug: "transcript-editor",
-    name: "Transcript Editor",
-    rarity: "EPIC",
-    blurb:
-      "Transcribe YouTube & media, edit transcripts, swap thumbnails and titles",
-    progress: 100,
-    stack: ["Next.js", "Supabase"],
-  },
-  {
-    slug: "lead-collector",
-    name: "Lead Collector",
-    rarity: "RARE",
-    blurb:
-      "Landing page + lead capture with automated follow-up for a small business",
-    progress: 100,
-    stack: ["Astro", "Airtable", "Vercel"],
-  },
-];
 
 export type SkillTier = "LGD" | "EPC" | "RAR";
 

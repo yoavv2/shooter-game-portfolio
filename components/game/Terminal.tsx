@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { missions, profile } from "@/lib/data";
+import { profile, type Mission } from "@/lib/data";
 import { useSound } from "./SoundProvider";
 import { useAchievements } from "./AchievementsProvider";
 
@@ -28,10 +28,15 @@ const BOOT: Line[] = [
 
 /**
  * Interactive fake shell on /comms. Opening it grants FOUND_TERMINAL; the
- * `sudo hire` easter egg grants SUDO_HIRE. All output is driven off lib/data
- * so it stays in sync with the rest of the site.
+ * `sudo hire` easter egg grants SUDO_HIRE. Profile output is driven off
+ * lib/data; missions arrive as a prop from the server page (they live in
+ * content/missions/*.md, which only server code can read).
  */
-export default function Terminal() {
+export default function Terminal({
+  missions,
+}: {
+  missions: Pick<Mission, "name" | "rarity" | "blurb">[];
+}) {
   const { play } = useSound();
   const { unlock } = useAchievements();
   const [lines, setLines] = useState<Line[]>(BOOT);

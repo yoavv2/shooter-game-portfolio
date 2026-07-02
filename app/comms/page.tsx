@@ -3,6 +3,7 @@ import Shell from "@/components/Shell";
 import PhotoSlot from "@/components/PhotoSlot";
 import Terminal from "@/components/game/Terminal";
 import { profile } from "@/lib/data";
+import { getMissions } from "@/lib/missions";
 
 export const metadata: Metadata = {
   title: "Comms — Yoav Hevroni",
@@ -116,7 +117,13 @@ export default function CommsPage() {
         <div className="mb-3 font-mono text-[12px] tracking-wide3 text-faint">
           DIRECT UPLINK // TERMINAL
         </div>
-        <Terminal />
+        <Terminal
+          missions={getMissions().map(({ name, rarity, blurb }) => ({
+            name,
+            rarity,
+            blurb,
+          }))}
+        />
       </div>
     </Shell>
   );
