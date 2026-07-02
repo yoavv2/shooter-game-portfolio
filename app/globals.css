@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-chakra: "Chakra Petch", sans-serif;
+  --font-jetbrains: "JetBrains Mono", monospace;
+}
+
+html,
+body {
+  margin: 0;
+  background: #0d1015;
+  color: #e8edf2;
+  font-family: var(--font-chakra);
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  /* beveled corner clip used on primary CTAs */
+  .clip-bevel {
+    clip-path: polygon(
+      0 10px,
+      10px 10px,
+      10px 0,
+      100% 0,
+      100% calc(100% - 10px),
+      calc(100% - 10px) calc(100% - 10px),
+      calc(100% - 10px) 100%,
+      0 100%
+    );
+  }
+  .clip-bevel-sm {
+    clip-path: polygon(
+      0 8px,
+      8px 8px,
+      8px 0,
+      100% 0,
+      100% calc(100% - 8px),
+      calc(100% - 8px) calc(100% - 8px),
+      calc(100% - 8px) 100%,
+      0 100%
+    );
+  }
+  /* diagonal hazard hatch used for empty screenshot slots */
+  .hatch {
+    background: repeating-linear-gradient(
+      45deg,
+      #1a2029 0 10px,
+      #141a22 10px 20px
+    );
+  }
+}
+
+/* ── game-feel layer ─────────────────────────────────────────────── */
+
+/* crosshair cursor — desktop pointers only */
+@media (pointer: fine) {
+  body {
+    cursor:
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g stroke="%23e8edf2" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="23"/><line x1="1" y1="12" x2="8" y2="12"/><line x1="16" y1="12" x2="23" y2="12"/></g><circle cx="12" cy="12" r="1.5" fill="%23e8edf2"/></svg>')
+        12 12,
+      crosshair;
+  }
+  /* lock-on: gold reticle over interactive targets */
+  a,
+  button,
+  [data-sfx] {
+    cursor:
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><g stroke="%23f2c41d" stroke-width="1.5"><line x1="13" y1="1" x2="13" y2="8"/><line x1="13" y1="18" x2="13" y2="25"/><line x1="1" y1="13" x2="8" y2="13"/><line x1="18" y1="13" x2="25" y2="13"/><path d="M4 8 V4 H8" fill="none"/><path d="M18 4 H22 V8" fill="none"/><path d="M22 18 V22 H18" fill="none"/><path d="M8 22 H4 V18" fill="none"/></g><circle cx="13" cy="13" r="1.5" fill="%23f2c41d"/></svg>')
+        13 13,
+      pointer;
+  }
+}
+
+/* route transition wipe + reveal */
+.route-wipe {
+  animation: wipe-out 0.42s steps(12) forwards;
+}
+@keyframes wipe-out {
+  0% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  70% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0.9;
+  }
+}
+.route-reveal {
+  animation: reveal-in 0.32s ease-out;
+}
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* achievement toast entrance */
+.animate-toast-in {
+  animation: toast-in 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-wipe,
+  .route-reveal,
+  .animate-toast-in {
+    animation: none;
+  }
+  .route-wipe {
+    display: none;
+  }
+}
