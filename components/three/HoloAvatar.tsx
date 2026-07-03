@@ -4,7 +4,7 @@ import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { Sparkles, useTexture } from "@react-three/drei";
-import HoloCanvas from "./HoloCanvas";
+import HoloCanvas, { useCoarsePointer } from "./HoloCanvas";
 
 /** hologram blue — matches RARE accent / site cyan palette */
 const HOLO = new THREE.Color("#5ab0ff");
@@ -168,11 +168,18 @@ function TexturedAvatar({ src }: { src: string }) {
 }
 
 function AvatarScene({ src }: { src?: string }) {
+  const coarse = useCoarsePointer();
   return (
     <>
       <ambientLight intensity={0.4} />
       {src ? <TexturedAvatar src={src} /> : <ProceduralAvatar />}
-      <Sparkles count={34} scale={[2.2, 3, 1.5]} size={2} speed={0.3} color={HOLO} />
+      <Sparkles
+        count={coarse ? 10 : 34}
+        scale={[2.2, 3, 1.5]}
+        size={2}
+        speed={0.3}
+        color={HOLO}
+      />
     </>
   );
 }

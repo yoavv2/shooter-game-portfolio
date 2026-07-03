@@ -4,7 +4,7 @@ import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { Float, OrbitControls, Sparkles } from "@react-three/drei";
-import HoloCanvas from "./HoloCanvas";
+import HoloCanvas, { useCoarsePointer } from "./HoloCanvas";
 import { rarityColor, tierToRarity, type SkillTier } from "@/lib/data";
 
 /** deterministic per-skill starting pose so each item reads as distinct */
@@ -28,6 +28,7 @@ function tierGeometry(tier: SkillTier) {
 
 function HoloItem({ tier, name }: { tier: SkillTier; name: string }) {
   const color = rarityColor[tierToRarity[tier]];
+  const coarse = useCoarsePointer();
   const group = useRef<THREE.Group>(null);
   const geometry = useMemo(() => tierGeometry(tier), [tier]);
   const seed = useMemo(() => nameSeed(name), [name]);
@@ -66,7 +67,7 @@ function HoloItem({ tier, name }: { tier: SkillTier; name: string }) {
         </group>
       </Float>
 
-      <Sparkles count={26} scale={3} size={2} speed={0.35} color={color} />
+      <Sparkles count={coarse ? 8 : 26} scale={3} size={2} speed={0.35} color={color} />
       <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.9} />
     </>
   );
