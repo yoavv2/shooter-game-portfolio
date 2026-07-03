@@ -9,6 +9,7 @@ const BOOT_LINES = [
   "> mounting sectors: MAIN · MISSIONS · LOADOUT · COMMS ✓",
   "> operative: YOAV_HEVRONI // FULL-STACK",
   "> clearance: OPEN TO WORK",
+  "> 5 hidden medals armed — hints behind the ★ in the HUD.",
   "> system ready.",
 ];
 

@@ -27,7 +27,8 @@ const BOOT: Line[] = [
 ];
 
 /**
- * Interactive fake shell on /comms. Opening it grants FOUND_TERMINAL; the
+ * Interactive fake shell on /comms. Running a first command grants
+ * FOUND_TERMINAL; the
  * `sudo hire` easter egg grants SUDO_HIRE. Profile output is driven off
  * lib/data; missions arrive as a prop from the server page (they live in
  * content/missions/*.md, which only server code can read).
@@ -46,11 +47,6 @@ export default function Terminal({
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // opening the terminal is itself an achievement
-  useEffect(() => {
-    unlock("FOUND_TERMINAL");
-  }, [unlock]);
-
   // keep the log pinned to the newest line
   useEffect(() => {
     const el = scrollRef.current;
@@ -67,6 +63,9 @@ export default function Terminal({
     print("in", `${PROMPT} ${raw}`);
     const cmd = raw.trim().toLowerCase().replace(/\s+/g, " ");
     if (!cmd) return;
+
+    // running any command — not merely landing on the page — earns the medal
+    unlock("FOUND_TERMINAL");
 
     switch (cmd) {
       case "help":

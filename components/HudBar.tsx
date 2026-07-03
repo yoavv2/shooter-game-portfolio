@@ -25,7 +25,7 @@ function SocialBadge({ tag }: { tag: string }) {
 export default function HudBar() {
   const pathname = usePathname();
   const { muted, toggleMute } = useSound();
-  const { unlocked, total } = useAchievements();
+  const { unlocked, total, openPanel } = useAchievements();
 
   return (
     <header className="flex h-[62px] flex-none items-center justify-between border-b border-line2 bg-[rgba(9,12,17,0.92)] px-4 md:px-[26px]">
@@ -56,12 +56,14 @@ export default function HudBar() {
       </div>
 
       <div className="hidden items-center gap-[22px] md:flex">
-        <span
-          className="font-mono text-[10px] tracking-[0.12em] text-steel"
-          title="achievements unlocked"
+        <button
+          onClick={openPanel}
+          title="medals & hints"
+          aria-label="open medals and hints"
+          className="border border-[#39424e] px-2 py-1 font-mono text-[10px] tracking-[0.12em] text-steel hover:border-gold hover:text-gold"
         >
           ★ {unlocked.length}/{total}
-        </span>
+        </button>
         <button
           onClick={toggleMute}
           aria-label={muted ? "unmute sound" : "mute sound"}
