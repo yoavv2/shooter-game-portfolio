@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Shell from "@/components/Shell";
 import PhotoSlot from "@/components/PhotoSlot";
 import Terminal from "@/components/game/Terminal";
-import { profile } from "@/lib/data";
+import { profile, stats } from "@/lib/data";
 import { getMissions } from "@/lib/missions";
 
 export const metadata: Metadata = {
@@ -77,6 +77,7 @@ export default function CommsPage() {
             </a>
             <a
               href={profile.cv}
+              download="Yoav-Hevroni-CV.pdf"
               className="flex items-center border border-[#39424e] px-7 py-[13px] text-[14px] font-bold tracking-wide2 text-[#dfe6ee] hover:border-ink"
             >
               CV ↓
@@ -87,15 +88,11 @@ export default function CommsPage() {
         {/* RIGHT — operative file card */}
         <section className="flex w-full flex-col lg:w-[340px] lg:flex-none">
           <div className="mb-3 font-mono text-[12px] tracking-wide3 text-faint">
-            OPERATIVE FILE // 2026
+            OPERATIVE FILE // {new Date().getFullYear()}
           </div>
           <PhotoSlot src="/me.png" className="h-[400px] w-full max-w-[340px]" />
           <div className="flex w-full max-w-[340px] justify-between border border-t-0 border-line bg-[rgba(13,17,23,0.9)] px-3.5 py-3">
-            {[
-              { label: "FRONTEND", value: "95", color: "#f2c41d" },
-              { label: "BACKEND", value: "88", color: "#a3d514" },
-              { label: "AI-DEV", value: "100", color: "#3b9dff" },
-            ].map((s) => (
+            {stats.map((s) => (
               <div key={s.label} className="flex flex-col gap-0.5">
                 <span className="text-[10px] font-semibold tracking-wide2 text-muted">
                   {s.label}

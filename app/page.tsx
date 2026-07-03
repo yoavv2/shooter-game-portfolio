@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import Shell from "@/components/Shell";
 import AvatarStage from "@/components/AvatarStage";
 import StatTriple from "@/components/StatTriple";
+import TlvClock from "@/components/TlvClock";
 import { profile, rarityColor, rarityChip } from "@/lib/data";
 import { getMissions } from "@/lib/missions";
 
@@ -91,9 +93,18 @@ export default function LobbyPage() {
         <section className="flex w-full flex-col justify-end lg:w-[310px] lg:flex-none">
           <div className="flex flex-col gap-[14px] border border-line bg-[rgba(15,19,26,0.92)] p-4">
             <div className="hatch relative flex h-[150px] items-end overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center font-mono text-[10px] text-faint">
-                featured project screenshot
-              </div>
+              {featured?.image ? (
+                <Image
+                  src={featured.image}
+                  alt={`${featured.name} screenshot`}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center font-mono text-[10px] text-faint">
+                  featured project screenshot
+                </div>
+              )}
               <div className="relative w-full bg-[linear-gradient(transparent,rgba(5,7,10,0.9))] px-3 py-2.5 text-[19px] font-bold tracking-[0.06em] text-white">
                 {featured ? featured.name.toUpperCase() : "CLASSIFIED"}
               </div>
@@ -133,7 +144,7 @@ export default function LobbyPage() {
       {/* footer contact strip */}
       <div className="flex flex-none flex-col gap-2 px-6 pb-4 font-mono text-[11px] text-faint sm:flex-row sm:items-center sm:justify-between lg:px-[26px]">
         <span>
-          TLV · UTC+3 · {profile.phone}
+          <TlvClock /> · {profile.phone}
         </span>
         <a href={`mailto:${profile.email}`} className="hover:text-ink">
           {profile.email}

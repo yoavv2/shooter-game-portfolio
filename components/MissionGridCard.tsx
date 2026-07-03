@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Mission, rarityColor } from "@/lib/data";
 
@@ -7,10 +8,19 @@ export default function MissionGridCard({ mission }: { mission: Mission }) {
       href={`/missions/${mission.slug}`}
       className="flex flex-col border border-line bg-[rgba(13,17,23,0.9)] transition-colors hover:border-[#39424e]"
     >
-      <div className="hatch relative flex h-[96px] items-center justify-center">
-        <span className="font-mono text-[10px] text-faint">
-          {mission.slug} screenshot
-        </span>
+      <div className="hatch relative flex h-[96px] items-center justify-center overflow-hidden">
+        {mission.image ? (
+          <Image
+            src={mission.image}
+            alt={`${mission.name} screenshot`}
+            fill
+            className="object-cover"
+          />
+        ) : (
+          <span className="font-mono text-[10px] text-faint">
+            {mission.slug} screenshot
+          </span>
+        )}
         <span
           className="absolute left-[10px] top-2 font-mono text-[9px] font-semibold tracking-[0.12em]"
           style={{ color: rarityColor[mission.rarity] }}

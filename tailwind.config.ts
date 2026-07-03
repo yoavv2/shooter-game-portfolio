@@ -21,6 +21,7 @@ const config: Config = {
         steel: "#77818d",
         gold: "#f2c41d",
         green: "#39d353",
+        red: "#e5484d",
         blue: "#3b9dff",
         purple: "#a86ee0",
         // rarity accents

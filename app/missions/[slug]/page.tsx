@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Shell from "@/components/Shell";
@@ -42,8 +43,25 @@ export default function MissionPage({
           ← BACK TO MISSION SELECT
         </Link>
 
+        {/* hero screenshot */}
+        {mission.image && (
+          <div className="relative mt-5 h-[220px] max-w-[820px] overflow-hidden border border-b-0 border-line sm:h-[300px]">
+            <Image
+              src={mission.image}
+              alt={`${mission.name} screenshot`}
+              fill
+              priority
+              className="object-cover"
+            />
+          </div>
+        )}
+
         {/* header */}
-        <div className="mt-5 flex flex-col gap-3 border border-line bg-[rgba(13,17,23,0.9)] px-[22px] py-5">
+        <div
+          className={`flex max-w-[820px] flex-col gap-3 border border-line bg-[rgba(13,17,23,0.9)] px-[22px] py-5 ${
+            mission.image ? "" : "mt-5"
+          }`}
+        >
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h1 className="text-[26px] font-bold tracking-[0.04em] text-[#f4f7fa]">
               {mission.name.toUpperCase()}

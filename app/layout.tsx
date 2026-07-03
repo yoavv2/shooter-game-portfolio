@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Chakra_Petch, JetBrains_Mono } from "next/font/google";
+import { siteUrl } from "@/lib/site";
 import SoundProvider from "@/components/game/SoundProvider";
 import AchievementsProvider from "@/components/game/AchievementsProvider";
 import GameLayer from "@/components/game/GameLayer";
@@ -21,6 +22,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Yoav Hevroni — Full-Stack Operative",
   description:
     "Full-stack developer portfolio. React, TypeScript, Node. Production web apps end-to-end with AI-assisted workflows. Based in Tel Aviv, open to work.",
@@ -29,6 +31,9 @@ export const metadata: Metadata = {
     description:
       "Production web apps end-to-end — React, TypeScript, Node. Open to work.",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 

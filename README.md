@@ -27,8 +27,10 @@ npm run build    # static prerender, all routes ○ (Static)
   `app/loadout/page.tsx`, `app/comms/page.tsx`. Until then the design's
   "drop your photo" placeholder shows.
 - **CV** — put `public/cv.pdf`. The `CV ↓` links already point at `/cv.pdf`.
-- **Project screenshots** — the hatch placeholders in the mission cards; wire
-  real images the same way as the photo.
+- **Project screenshots** — drop an image in `public/missions/` and set
+  `image: /missions/<name>.png` in the mission's frontmatter. It shows on the
+  mission grid card, the lobby featured panel and the detail page. Until then
+  the hatch placeholder shows.
 
 ## Edit content
 
@@ -52,6 +54,7 @@ order: 1                    # sort position in the grid
 stack: [Next.js, Supabase]  # tech chips
 liveUrl: https://…          # optional — shows a DEPLOY button
 repoUrl: https://github.com/… # optional — shows a SOURCE button
+image: /missions/my-project.png # optional — screenshot in public/missions/
 ---
 
 ## OBJECTIVE
@@ -63,6 +66,12 @@ Free-form markdown — headings, lists, links, code, images.
   automatically (lobby, mission grid, terminal, detail page).
 - **Edit / remove** — edit or delete the file.
 - No `liveUrl`? The detail page shows "OFFLINE — INTEL ONLY" instead of DEPLOY.
+
+## Deploy
+
+Set `NEXT_PUBLIC_SITE_URL` (e.g. `https://yoavhevroni.dev`) in the deploy env
+so OG tags, `sitemap.xml` and `robots.txt` emit absolute URLs. On Vercel it
+falls back to the production domain automatically.
 
 ## Theme
 

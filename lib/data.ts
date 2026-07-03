@@ -31,23 +31,26 @@ export const rarityChip: Record<
   },
 };
 
+const base = "Tel Aviv";
+const years = "4+";
+
 export const profile = {
   name: "Yoav_Hevroni",
   displayName: "YOAV HEVRONI",
   role: "FULL-STACK OPERATIVE · FRONTEND CLASS",
-  base: "Tel Aviv",
-  years: "4+",
+  base,
+  years,
   status: "OPEN TO WORK",
   phone: "+972 52 870 1646",
   email: "YoavHevroni1@gmail.com",
-  github: "https://github.com/",
-  linkedin: "https://linkedin.com/",
+  github: "https://github.com/yoavv2",
+  linkedin: "https://www.linkedin.com/in/yoavhevroni/",
   cv: "/cv.pdf",
   briefing: [
     "Builds production web apps end-to-end — React, TypeScript, Node.",
     "Turns product requirements into maintainable systems & polished UX.",
     "AI-assisted workflows across planning, implementation & testing.",
-    "Base: Tel Aviv · 4+ yrs in the field.",
+    `Base: ${base} · ${years} yrs in the field.`,
   ],
 };
 
@@ -70,6 +73,8 @@ export type Mission = {
   order: number;
   liveUrl?: string;
   repoUrl?: string;
+  /** screenshot path under public/, e.g. "/missions/gaphunter.png" */
+  image?: string;
 };
 
 export type SkillTier = "LGD" | "EPC" | "RAR";

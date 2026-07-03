@@ -9,6 +9,7 @@ stack:
   - Supabase
 # liveUrl: https://transcript-editor.example.com
 # repoUrl: https://github.com/yoavv2/transcript-editor
+# image: /missions/transcript-editor.png
 ---
 
 ## OBJECTIVE

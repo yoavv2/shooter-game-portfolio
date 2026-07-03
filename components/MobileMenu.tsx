@@ -171,6 +171,7 @@ export default function MobileMenu() {
             <div className="mt-auto flex flex-col gap-3 border-t border-line2 px-6 py-5">
               <a
                 href={profile.cv}
+                download="Yoav-Hevroni-CV.pdf"
                 className="clip-bevel-sm bg-gold py-3 text-center text-[15px] font-bold tracking-wide2 text-[#141105]"
               >
                 CV ↓
