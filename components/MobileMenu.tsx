@@ -25,7 +25,7 @@ function Badge({ tag }: { tag: string }) {
 export default function MobileMenu() {
   const pathname = usePathname();
   const { muted, toggleMute } = useSound();
-  const { unlocked, total } = useAchievements();
+  const { unlocked, total, openPanel } = useAchievements();
   const [open, setOpen] = useState(false);
   const burgerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -112,9 +112,16 @@ export default function MobileMenu() {
               <span className="font-mono text-[11px] tracking-hud text-steel">
                 TAC MENU
               </span>
-              <span className="font-mono text-[10px] tracking-[0.12em] text-steel">
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  openPanel();
+                }}
+                aria-label="open medals and hints"
+                className="border border-[#39424e] px-2 py-1 font-mono text-[10px] tracking-[0.12em] text-steel"
+              >
                 ★ {unlocked.length}/{total}
-              </span>
+              </button>
             </div>
 
             <nav className="flex flex-col px-3 py-3">
