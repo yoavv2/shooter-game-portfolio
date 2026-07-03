@@ -94,6 +94,7 @@ export default function HudBar() {
         </a>
         <a
           href={profile.cv}
+          download="Yoav-Hevroni-CV.pdf"
           className="flex items-center gap-2 bg-gold px-[14px] py-1.5 text-[12px] font-bold tracking-[0.12em] text-[#10120a] hover:brightness-110"
         >
           CV ↓

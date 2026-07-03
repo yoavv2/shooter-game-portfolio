@@ -10,6 +10,7 @@ stack:
   - Vercel
 # liveUrl: https://lead-collector.example.com
 # repoUrl: https://github.com/yoavv2/lead-collector
+# image: /missions/lead-collector.png
 ---
 
 ## OBJECTIVE

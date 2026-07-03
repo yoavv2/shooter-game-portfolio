@@ -15,7 +15,7 @@ export default function MissionsPage() {
       <div className="flex flex-1 flex-col px-6 py-8 lg:px-[34px]">
         <div className="flex items-center gap-3">
           <span className="font-mono text-[12px] tracking-wide3 text-faint">
-            OPERATION LOG // 2026
+            OPERATION LOG // {new Date().getFullYear()}
           </span>
         </div>
         <div className="mb-3 mt-4 flex items-baseline justify-between">

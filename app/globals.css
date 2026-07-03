@@ -16,6 +16,37 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* text selection stays on-theme */
+::selection {
+  background: #f2c41d;
+  color: #141105;
+}
+
+/* keyboard focus: gold HUD outline instead of browser default */
+:focus-visible {
+  outline: 2px solid #f2c41d;
+  outline-offset: 2px;
+}
+
+/* themed scrollbar */
+html {
+  scrollbar-color: #39424e #0d1015; /* firefox */
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0d1015;
+}
+::-webkit-scrollbar-thumb {
+  background: #39424e;
+  border: 2px solid #0d1015;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f2c41d;
+}
+
 @layer components {
   /* beveled corner clip used on primary CTAs */
   .clip-bevel {

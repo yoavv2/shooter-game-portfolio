@@ -18,6 +18,14 @@ const MISSIONS_DIR = path.join(process.cwd(), "content", "missions");
 
 const RARITIES: Rarity[] = ["LEGENDARY", "EPIC", "RARE"];
 
+/** intel-body links to other sites open in a new tab */
+function externalizeLinks(html: string): string {
+  return html.replace(
+    /<a href="(https?:\/\/)/g,
+    '<a target="_blank" rel="noopener noreferrer" href="$1'
+  );
+}
+
 export type MissionDetail = Mission & {
   /** markdown body rendered to HTML */
   html: string;
@@ -40,7 +48,8 @@ function parseFile(file: string): MissionDetail {
     order: typeof data.order === "number" ? data.order : 99,
     liveUrl: data.liveUrl || undefined,
     repoUrl: data.repoUrl || undefined,
-    html: marked.parse(content, { async: false }) as string,
+    image: data.image || undefined,
+    html: externalizeLinks(marked.parse(content, { async: false }) as string),
   };
 }
 

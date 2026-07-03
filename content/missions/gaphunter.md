@@ -10,6 +10,7 @@ stack:
   - OpenAI
 # liveUrl: https://gaphunter.example.com
 # repoUrl: https://github.com/yoavv2/gaphunter
+# image: /missions/gaphunter.png
 ---
 
 ## OBJECTIVE
