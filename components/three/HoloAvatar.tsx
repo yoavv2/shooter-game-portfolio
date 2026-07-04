@@ -3,8 +3,9 @@
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import { Sparkles, useTexture } from "@react-three/drei";
+import { Environment, Lightformer, Sparkles, useTexture } from "@react-three/drei";
 import HoloCanvas, { useCoarsePointer } from "./HoloCanvas";
+import MeshAvatar from "./MeshAvatar";
 
 /** hologram blue — matches RARE accent / site cyan palette */
 const HOLO = new THREE.Color("#5ab0ff");
@@ -97,7 +98,7 @@ const FRAG_TEXTURED = /* glsl */ `
 `;
 
 /** tilt the plane toward the pointer for a parallax depth read */
-function useParallax() {
+export function useParallax() {
   const group = useRef<THREE.Group>(null);
   useFrame((state) => {
     if (!group.current) return;
@@ -171,8 +172,18 @@ function AvatarScene({ src }: { src?: string }) {
   const coarse = useCoarsePointer();
   return (
     <>
-      <ambientLight intensity={0.4} />
-      {src ? <TexturedAvatar src={src} /> : <ProceduralAvatar />}
+      {/* key + fill + rim so the PBR textures read with depth */}
+      <ambientLight intensity={0.35} />
+      <directionalLight position={[2, 3, 4]} intensity={2.2} />
+      <directionalLight position={[-3, 1, 2]} intensity={0.8} color="#9cc6ff" />
+      <directionalLight position={[0, 2, -4]} intensity={1.4} color="#ffffff" />
+      {/* procedural env map (no CDN fetch) — feeds metallic reflections */}
+      <Environment resolution={256}>
+        <Lightformer intensity={2} position={[0, 2, 3]} scale={[6, 6, 1]} />
+        <Lightformer intensity={1} position={[-3, 0, 2]} scale={[4, 4, 1]} color="#6fa8ff" />
+        <Lightformer intensity={1.2} position={[0, 1, -4]} scale={[6, 6, 1]} />
+      </Environment>
+      <MeshAvatar url="/models/avatar.glb" />
       <Sparkles
         count={coarse ? 10 : 34}
         scale={[2.2, 3, 1.5]}
