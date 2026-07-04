@@ -204,7 +204,7 @@ function AvatarScene({ src }: { src?: string }) {
 export default function HoloAvatar({ src }: { src?: string }) {
   return (
     <HoloCanvas
-      className="h-full w-full cursor-crosshair"
+      className="h-full w-full cursor-grab active:cursor-grabbing"
       fallback={<StaticAvatarArt />}
     >
       <AvatarScene src={src} />
