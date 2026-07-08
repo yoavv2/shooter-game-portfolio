@@ -1,8 +1,9 @@
 "use client";
 
-import { useLayoutEffect, useMemo, useRef, type PointerEvent } from "react";
+import { useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
+import type { ThreeEvent } from "@react-three/fiber";
 
 /**
  * GLB mesh rendered with its real PBR materials. Auto-fits into the operator
@@ -37,17 +38,17 @@ export default function MeshAvatar({ url }: { url: string }) {
     inner.current.rotation.set(0, 0, 0);
   }, [model]);
 
-  const onDown = (e: PointerEvent) => {
+  const onDown = (e: ThreeEvent<PointerEvent>) => {
     dragging.current = true;
     last.current = { x: e.clientX, y: e.clientY };
     // capture so drags that leave the model keep feeding move events
     (e.target as Element).setPointerCapture?.(e.pointerId);
   };
-  const onUp = (e: PointerEvent) => {
+  const onUp = (e: ThreeEvent<PointerEvent>) => {
     dragging.current = false;
     (e.target as Element).releasePointerCapture?.(e.pointerId);
   };
-  const onMove = (e: PointerEvent) => {
+  const onMove = (e: ThreeEvent<PointerEvent>) => {
     if (!dragging.current || !inner.current) return;
     const dx = e.clientX - last.current.x;
     const dy = e.clientY - last.current.y;
